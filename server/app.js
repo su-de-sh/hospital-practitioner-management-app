@@ -1,7 +1,7 @@
 const express = require("express");
 const config = require("./utils/config");
 const mongoose = require("mongoose");
-const userRouter = require("./controllers/userRouter");
+const userRouter = require("./controllers/user");
 
 const app = express();
 app.use(express.json());
