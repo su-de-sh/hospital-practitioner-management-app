@@ -21,4 +21,19 @@ practitionerRouter.post("/", async (req, res, next) => {
   }
 });
 
+practitionerRouter.put("/:id", async (req, res, next) => {
+  try {
+    const practitioner = await Practioner.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+      }
+    );
+    res.status(200).json(practitioner);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = practitionerRouter;
