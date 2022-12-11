@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const practionerSchema = new mongoose.Schema({
+const practitionerSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -29,8 +29,20 @@ const practionerSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  isIcuSpecialist: {
+    type: Boolean,
+    required: true,
+  },
 });
 
-const Practioner = mongoose.model("Practioner", practionerSchema);
+practitionerSchema.set("toJSON", {
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id.toString();
+    delete returnedObject._id;
+    delete returnedObject.__v;
+  },
+});
+
+const Practioner = mongoose.model("Practioner", practitionerSchema);
 
 module.exports = Practioner;

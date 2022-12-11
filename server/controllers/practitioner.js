@@ -11,4 +11,14 @@ practitionerRouter.get("/", async (req, res, next) => {
   }
 });
 
+practitionerRouter.post("/", async (req, res, next) => {
+  try {
+    const practitioner = new Practioner(req.body);
+    const savedPractitioner = await practitioner.save();
+    res.status(201).json(savedPractitioner);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = practitionerRouter;
