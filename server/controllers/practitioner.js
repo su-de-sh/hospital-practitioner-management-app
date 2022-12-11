@@ -1,10 +1,10 @@
-const Practioner = require("../models/practioner");
+const Practitioner = require("../models/practitioner");
 
 const practitionerRouter = require("express").Router();
 
 practitionerRouter.get("/", async (req, res, next) => {
   try {
-    const practitioners = await Practioner.find({});
+    const practitioners = await Practitioner.find({});
     res.status(200).json(practitioners);
   } catch (error) {
     next(error);
@@ -13,7 +13,11 @@ practitionerRouter.get("/", async (req, res, next) => {
 
 practitionerRouter.post("/", async (req, res, next) => {
   try {
-    const practitioner = new Practioner(req.body);
+    if (Practitioner.findOne({ email: req.body.email })) {
+      return res.status(400).json({ message: "Email already exists" });
+    }
+
+    const practitioner = new Practitioner(req.body);
     const savedPractitioner = await practitioner.save();
     res.status(201).json(savedPractitioner);
   } catch (error) {
@@ -23,7 +27,7 @@ practitionerRouter.post("/", async (req, res, next) => {
 
 practitionerRouter.put("/:id", async (req, res, next) => {
   try {
-    const practitioner = await Practioner.findByIdAndUpdate(
+    const practitioner = await Practitioner.findByIdAndUpdate(
       req.params.id,
       req.body,
       {
@@ -40,7 +44,7 @@ practitionerRouter.put("/:id", async (req, res, next) => {
 
 practitionerRouter.delete("/:id", async (req, res, next) => {
   try {
-    const practitioner = await Practioner.findByIdAndDelete(req.params.id);
+    const practitioner = await Practitioner.findByIdAndDelete(req.params.id);
     if (!practitioner)
       return res.status(404).json({ message: "Practitioner not found" });
 

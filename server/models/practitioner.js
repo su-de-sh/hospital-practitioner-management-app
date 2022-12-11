@@ -57,6 +57,6 @@ practitionerSchema.set("toJSON", {
   },
 });
 
-const Practioner = mongoose.model("Practioner", practitionerSchema);
+const Practitioner = mongoose.model("Practioner", practitionerSchema);
 
-module.exports = Practioner;
+module.exports = Practitioner;
