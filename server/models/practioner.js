@@ -14,6 +14,14 @@ const practitionerSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  profilePic: {
+    type: String,
+    required: false,
+  },
+  workingDays: {
+    type: Array,
+    required: true,
+  },
 
   contact: {
     type: String,
