@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const fileUpload = require("express-fileupload");
 const config = require("./utils/config");
 const userRouter = require("./controllers/user");
 const {
@@ -12,6 +13,7 @@ const practitionerRouter = require("./controllers/practitioner");
 
 const app = express();
 app.use(express.json());
+app.use(fileUpload({ useTempFiles: true }));
 
 const mongoUrl = config.MONGODB_URI;
 mongoose.connect(mongoUrl).then(() => {

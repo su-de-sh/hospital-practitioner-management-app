@@ -1,6 +1,12 @@
+const cloudinary = require("cloudinary").v2;
+const practitionerRouter = require("express").Router();
 const Practitioner = require("../models/practitioner");
 
-const practitionerRouter = require("express").Router();
+cloudinary.config({
+  cloud_name: "dqgzhdegr",
+  api_key: "541558938883319",
+  api_secret: "j_GGZo5ZJqGD2OVG3G-szf--5Mg",
+});
 
 practitionerRouter.get("/", async (req, res, next) => {
   try {
@@ -13,8 +19,15 @@ practitionerRouter.get("/", async (req, res, next) => {
 
 practitionerRouter.post("/", async (req, res, next) => {
   try {
-    if (Practitioner.findOne({ email: req.body.email })) {
+    if (await Practitioner.findOne({ email: req.body.email })) {
       return res.status(400).json({ message: "Email already exists" });
+    }
+    if (req.files) {
+      const file = req.files.photo;
+      const uploadedResponse = await cloudinary.uploader.upload(
+        file.tempFilePath
+      );
+      req.body.profilePic = uploadedResponse.url;
     }
 
     const practitioner = new Practitioner(req.body);
