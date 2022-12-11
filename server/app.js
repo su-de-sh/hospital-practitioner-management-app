@@ -2,7 +2,12 @@ const express = require("express");
 const mongoose = require("mongoose");
 const config = require("./utils/config");
 const userRouter = require("./controllers/user");
-const { unknownEndpoint, errorHandler } = require("./utils/middleware");
+const {
+  unknownEndpoint,
+  errorHandler,
+  userExtractor,
+  tokenExtractor,
+} = require("./utils/middleware");
 const practitionerRouter = require("./controllers/practitioner");
 
 const app = express();
@@ -19,7 +24,7 @@ app.get("/", async (req, res) => {
 });
 
 app.use("/api/users", userRouter);
-app.use("/api/practitioner", practitionerRouter);
+app.use("/api/practitioner", tokenExtractor, userExtractor, practitionerRouter);
 app.use(unknownEndpoint);
 app.use(errorHandler);
 
