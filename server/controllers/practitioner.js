@@ -30,6 +30,8 @@ practitionerRouter.put("/:id", async (req, res, next) => {
         new: true,
       }
     );
+    if (!practitioner)
+      return res.status(404).json({ message: "Practitioner not found" });
     res.status(200).json(practitioner);
   } catch (error) {
     next(error);
@@ -39,6 +41,9 @@ practitionerRouter.put("/:id", async (req, res, next) => {
 practitionerRouter.delete("/:id", async (req, res, next) => {
   try {
     const practitioner = await Practioner.findByIdAndDelete(req.params.id);
+    if (!practitioner)
+      return res.status(404).json({ message: "Practitioner not found" });
+
     res.status(200).json(practitioner);
   } catch (error) {
     next(error);
