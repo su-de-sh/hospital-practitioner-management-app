@@ -36,4 +36,13 @@ practitionerRouter.put("/:id", async (req, res, next) => {
   }
 });
 
+practitionerRouter.delete("/:id", async (req, res, next) => {
+  try {
+    const practitioner = await Practioner.findByIdAndDelete(req.params.id);
+    res.status(200).json(practitioner);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = practitionerRouter;
