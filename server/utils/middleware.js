@@ -5,24 +5,21 @@ const tokenExtractor = (request, response, next) => {
   const authorization = request.get("authorization");
   if (authorization && authorization.toLowerCase().startsWith("bearer ")) {
     request.token = authorization.substring(7);
+    next();
+  } else {
+    response.status(401).json({ error: "token missing" });
   }
-  next();
 };
 
 const userExtractor = (request, response, next) => {
-  const authorization = request.get("authorization");
-  if (authorization && authorization.toLowerCase().startsWith("bearer ")) {
-    const decodedToken = jwt.verify(request.token, config.SECRET);
-    if (!decodedToken.id) {
-      response.status(401).json({ error: "token missing or invalid" });
-    }
-    request.user = decodedToken;
-  }
+  const decodedToken = jwt.verify(request.token, config.SECRET);
+  request.user = decodedToken;
   next();
 };
 
-const unknownEndpoint = (request, response) => {
+const unknownEndpoint = (request, response, next) => {
   response.status(404).send({ error: "unknown endpoint" });
+  next();
 };
 
 const errorHandler = (error, request, response, next) => {
