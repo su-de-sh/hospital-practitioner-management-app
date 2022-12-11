@@ -17,6 +17,8 @@ const practitionerSchema = new mongoose.Schema({
   profilePic: {
     type: String,
     required: false,
+    default:
+      "https://res.cloudinary.com/dqgzhdegr/image/upload/v1670768602/images_1_io352m.jpg",
   },
   workingDays: {
     type: Array,
