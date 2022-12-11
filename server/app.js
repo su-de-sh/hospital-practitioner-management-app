@@ -1,7 +1,9 @@
 const express = require("express");
-const config = require("./utils/config");
 const mongoose = require("mongoose");
+const config = require("./utils/config");
 const userRouter = require("./controllers/user");
+const { unknownEndpoint, errorHandler } = require("./utils/middleware");
+const practitionerRouter = require("./controllers/practitioner");
 
 const app = express();
 app.use(express.json());
@@ -17,5 +19,8 @@ app.get("/", async (req, res) => {
 });
 
 app.use("/api/users", userRouter);
+app.use("/api/practitioner", practitionerRouter);
+app.use(unknownEndpoint);
+app.use(errorHandler);
 
 module.exports = app;
