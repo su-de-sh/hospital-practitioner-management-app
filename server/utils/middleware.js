@@ -12,7 +12,7 @@ const tokenExtractor = (request, response, next) => {
 };
 
 const userExtractor = (request, response, next) => {
-  const decodedToken = jwt.verify(request.token, config.SECRET);
+  const decodedToken = jwt.verify(request.token, config.ACCESS_TOKEN_SECRET);
   request.user = decodedToken;
   next();
 };

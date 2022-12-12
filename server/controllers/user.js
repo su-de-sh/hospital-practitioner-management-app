@@ -50,8 +50,32 @@ userRouter.post("/signin", async (req, res, next) => {
       email: user.email,
       id: user.id,
     };
-    const token = jwt.sign(userForToken, config.SECRET, { expiresIn: 60 * 60 });
-    res.status(200).json({ token, email: user.email, id: user.id });
+    const accessToken = jwt.sign(userForToken, config.ACCESS_TOKEN_SECRET, {
+      expiresIn: 60 * 60,
+    });
+    const refreshToken = jwt.sign(userForToken, config.REFRESH_TOKEN_SECRET, {
+      expiresIn: 24 * 60 * 60,
+    });
+    res.status(200).json({ accessToken, refreshToken });
+  } catch (error) {
+    next(error);
+  }
+});
+
+userRouter.post("/refresh", async (req, res, next) => {
+  try {
+    const { refreshToken } = req.body;
+    if (!refreshToken)
+      return res.status(401).json({ error: "Refresh token is missing!!" });
+    const user = jwt.verify(refreshToken, config.REFRESH_TOKEN_SECRET);
+    const userForToken = {
+      email: user.email,
+      id: user.id,
+    };
+    const accessToken = jwt.sign(userForToken, config.ACCESS_TOKEN_SECRET, {
+      expiresIn: 60 * 60,
+    });
+    res.status(200).json({ accessToken });
   } catch (error) {
     next(error);
   }
