@@ -25,7 +25,12 @@ practitionerRouter.post("/", async (req, res, next) => {
     if (req.files) {
       const file = req.files.photo;
       const uploadedResponse = await cloudinary.uploader.upload(
-        file.tempFilePath
+        file.tempFilePath,
+        {
+          width: 200,
+          height: 200,
+          crop: "fill",
+        }
       );
       req.body.profilePic = uploadedResponse.url;
     }
