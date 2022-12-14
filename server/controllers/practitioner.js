@@ -66,7 +66,7 @@ practitionerRouter.delete("/:id", async (req, res, next) => {
     if (!practitioner)
       return res.status(404).json({ message: "Practitioner not found" });
 
-    res.status(200).json(practitioner);
+    res.status(204).json(practitioner);
   } catch (error) {
     next(error);
   }
