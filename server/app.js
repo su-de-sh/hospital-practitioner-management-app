@@ -16,10 +16,7 @@ app.use(express.json());
 app.use(fileUpload({ useTempFiles: true }));
 
 const mongoUrl = config.MONGODB_URI;
-mongoose.connect(mongoUrl).then(() => {
-  // eslint-disable-next-line no-console
-  console.log("MongoDb connected");
-});
+mongoose.connect(mongoUrl);
 
 app.get("/", async (req, res) => {
   res.send("<h1>Welcome to Hospital Practitioner Management System</h1>");
