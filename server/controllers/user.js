@@ -44,7 +44,7 @@ userRouter.post("/signin", async (req, res, next) => {
     }
     const isCorrect = await bcrypt.compare(password, user.passwordHash);
     if (!isCorrect) {
-      return res.status(400).json({ error: "Password wrong" });
+      return res.status(400).json({ error: "Wrong password" });
     }
     const userForToken = {
       email: user.email,

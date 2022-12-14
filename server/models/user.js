@@ -1,9 +1,16 @@
 const mongoose = require("mongoose");
+const { isEmail } = require("validator");
 
 const userSchema = new mongoose.Schema({
-  email: String,
-  passwordHash: String,
- 
+  email: {
+    type: String,
+    required: true,
+    validate: [isEmail, "Please enter a valid email"],
+  },
+  passwordHash: {
+    type: String,
+    required: true,
+  },
 });
 
 userSchema.set("toJSON", {
