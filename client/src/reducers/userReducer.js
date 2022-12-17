@@ -13,7 +13,7 @@ const userSlice = createSlice({
   },
 });
 
-export const signupUser = (email, password) => {
+export const logInUser = (email, password) => {
   return async (dispatch) => {
     const user = await signUp(email, password);
 

@@ -1,16 +1,36 @@
-import {
-  Avatar,
-  Box,
-  Button,
-  Container,
-  TextField,
-  Typography,
-} from "@mui/material";
-import React from "react";
-import { Link } from "react-router-dom";
+import { Box, Container, TextField, Typography } from "@mui/material";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../components/Logo";
+import { setMessageObject } from "../reducers/messageReducer";
+import { LoadingButton } from "@mui/lab";
+import { signIn } from "../services/user";
+import { logInUser } from "../reducers/userReducer";
 
-const signIn = () => {
+const Signin = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const message = useSelector((state) => state.messages);
+  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSignin = async () => {
+    setLoading(true);
+    const response = await signIn(email, password);
+    console.log("response ,Signin.js ,[22]", response);
+    if (response.error) {
+      setLoading(false);
+      dispatch(setMessageObject(response.error));
+    } else {
+      setLoading(false);
+      window.localStorage.setItem("user", JSON.stringify(response));
+      dispatch(logInUser(email, password));
+      navigate("/");
+    }
+  };
+
   return (
     <>
       <Box
@@ -33,33 +53,68 @@ const signIn = () => {
             <Typography variant="h4" sx={{ mt: 5, fontWeight: "bold" }}>
               Sign In
             </Typography>
-            <TextField label="Email" variant="outlined" sx={{ mt: 4 }} />
-            <TextField label="Password" variant="outlined" sx={{ mt: 2 }} />
+            <TextField
+              label="Email"
+              name="email"
+              type="email"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+              variant="outlined"
+              sx={{ mt: 4 }}
+              error={!email ? true : false}
+              required
+            />
+            <TextField
+              label="Password"
+              name="password"
+              type="password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+              variant="outlined"
+              sx={{ mt: 2 }}
+              error={!password ? true : false}
+              required
+            />
+            {message ? (
+              <Typography sx={{ color: "error.main", fontSize: "10px" }}>
+                {" "}
+                {message}{" "}
+              </Typography>
+            ) : null}
             <Typography
               sx={{
                 mt: 2,
               }}
             >
-              Click here to create new account{" "}
-              <Link to="/signin" style={{ color: "green" }}>
+              Don't have an account?{" "}
+              <Link to="/Signin" style={{ color: "green" }}>
                 SignUp
               </Link>
             </Typography>
-            <Button
-              fullWidth
-              variant="filled"
+            <LoadingButton
+              loading={loading}
+              variant="outlined"
+              size="large"
+              onClick={handleSignin}
               sx={{
                 mt: 2,
                 color: "white",
                 backgroundColor: "green",
                 ":hover": {
-                  bgcolor: "primary.main",
+                  cursor: "pointer",
+
+                  backgroundColor: "primary.main",
                   color: "black",
                 },
               }}
+              disabled={!email || !password ? true : false}
             >
-              signIn
-            </Button>
+              Signin
+            </LoadingButton>
           </Container>
         </Box>
         <Box sx={{ width: "70%" }}>
@@ -79,4 +134,4 @@ const signIn = () => {
   );
 };
 
-export default signIn;
+export default Signin;

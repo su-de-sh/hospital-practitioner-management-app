@@ -1,5 +1,5 @@
 import { Icon } from "@iconify/react";
-import { Avatar, Box, Container, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "../components/Logo";
@@ -28,8 +28,9 @@ const DrawerNav = () => {
         }}
       >
         <Box>
-          {DashboardOptions.map((option) => (
+          {DashboardOptions.map((option, index) => (
             <Box
+              key={index}
               sx={{
                 alignItems: "center",
 

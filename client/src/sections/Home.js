@@ -1,28 +1,21 @@
 import { Box } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Navbar from "../components/Navbar";
-import PractitionerCard from "../components/PractitionerCard";
+import PractitionerCard from "./PractitionerCard";
 import DrawerNav from "./DrawerNav";
-import axios from "axios";
+
+import { useDispatch, useSelector } from "react-redux";
+import { initializePractitioners } from "../reducers/practitionerReducer";
 
 const Home = () => {
-  const [practitionerList, setPractitionerList] = useState([]);
-  useEffect(() => {
-    console.log("At line no. [11] of Home.js");
-    axios
-      .get("http://localhost:3001/api/practitioner", {
-        headers: {
-          authorization:
-            "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImlkIjoiNjM5NDZjMzFiZjg4YTU5MmNiYjM2YmNlIiwiaWF0IjoxNjcxMjY2NzY0LCJleHAiOjE2NzEyNzAzNjR9.AoMT4DY8hsCrWDpiWzwi6W1l_WDmWeE-SDvD83JZNL8",
-        },
-      })
-      .then((res) => {
-        console.log("res.data ,Home.js ,[18]", res.data);
-        setPractitionerList(res.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  const practitionerList = useSelector((state) => state.practitioners);
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(initializePractitioners());
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <>
       <Box

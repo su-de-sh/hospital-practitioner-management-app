@@ -13,7 +13,6 @@ import {
 } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import React from "react";
-import { Link } from "react-router-dom";
 
 const PractitionerCard = ({ practitioners }) => {
   //   const {
@@ -133,8 +132,8 @@ const PractitionerCard = ({ practitioners }) => {
       <Table>
         <TableHead>
           <TableRow>
-            {tableHeader.map((header) => (
-              <TableCell>
+            {tableHeader.map((header, index) => (
+              <TableCell key={index}>
                 <Typography
                   sx={{
                     fontSize: "14px",
