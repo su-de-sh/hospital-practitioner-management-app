@@ -1,17 +1,18 @@
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { green, grey, lightGreen } from "@mui/material/colors";
+import { green, grey } from "@mui/material/colors";
+
 import CssBaseline from "@mui/material/CssBaseline";
 import React from "react";
+import { alpha } from "@mui/material/styles";
 
 const MuiThemeProvider = ({ children }) => {
   const theme = createTheme({
     palette: {
-      mode: "dark",
       primary: {
-        main: lightGreen["A400"],
+        main: green[500],
       },
       secondary: {
-        main: green[500],
+        main: grey[500],
       },
       dark: {
         main: "#000000",
@@ -26,13 +27,23 @@ const MuiThemeProvider = ({ children }) => {
         secondary: grey[500],
       },
       button: {
-        primary: lightGreen["A400"],
-        secondary: "#ffffff",
+        primary: green[400],
+        secondary: "#121212",
       },
-      background: { paper: grey[200], default: "#ffffff" },
+      background: { paper: grey[200], default: "#121212" },
+      action: {
+        hover: alpha(grey[500], 0.08),
+        selected: alpha(grey[500], 0.16),
+        disabled: alpha(grey[500], 0.8),
+        disabledBackground: alpha(grey[500], 0.24),
+        focus: alpha(grey[500], 0.24),
+        hoverOpacity: 0.08,
+        disabledOpacity: 0.48,
+      },
     },
+
     typography: {
-      fontSize: 10,
+      fontSize: 12,
       fontWeightLight: 300,
       fontWeightRegular: 400,
       fontWeightMedium: 500,

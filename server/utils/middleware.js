@@ -7,7 +7,7 @@ const tokenExtractor = (request, response, next) => {
     request.token = authorization.substring(7);
     next();
   } else {
-    response.status(401).json({ error: "token missing" });
+    response.json({ error: "token missing" });
   }
 };
 
@@ -18,25 +18,25 @@ const userExtractor = (request, response, next) => {
 };
 
 const unknownEndpoint = (request, response, next) => {
-  response.status(404).send({ error: "unknown endpoint" });
+  response.json({ error: "unknown endpoint" });
   next();
 };
 
 const errorHandler = (error, request, response, next) => {
   if (error.name === "CastError") {
-    return response.status(400).send({
+    return response.json({
       error: "malformatted id",
     });
   } else if (error.name === "ValidationError") {
-    return response.status(400).json({
+    return response.json({
       error: error.message,
     });
   } else if (error.name === "JsonWebTokenError") {
-    return response.status(401).json({
+    return response.json({
       error: "invalid token",
     });
   } else if (error.name === "TokenExpiredError") {
-    return response.status(401).json({
+    return response.json({
       error: "token expired",
     });
   }

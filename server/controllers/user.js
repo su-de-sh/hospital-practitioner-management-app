@@ -9,11 +9,16 @@ userRouter.post("/signup", async (req, res, next) => {
   try {
     const { email, password } = req.body;
     if (!email || !password)
-      return res.status(400).json({ error: "Email or password is missing!!" });
+      return res.json({ error: "Email or password is missing!!" });
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      res.status(400).json({ error: "Email already exists!!" });
+      return res.json({ error: "Email already exists!!" });
+    }
+    if (password.length < 8) {
+      return res.json({
+        error: "Password must be at least 8 characters long!!",
+      });
     }
 
     const saltRounds = 10;
@@ -36,15 +41,15 @@ userRouter.post("/signin", async (req, res, next) => {
   try {
     const { email, password } = req.body;
     if (!email || !password)
-      return res.status(400).json({ error: "Email or password is missing!!" });
+      return res.json({ error: "Email or password is missing!!" });
 
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(400).json({ error: "Email doesnot exists" });
+      return res.json({ error: "Email doesnot exists" });
     }
     const isCorrect = await bcrypt.compare(password, user.passwordHash);
     if (!isCorrect) {
-      return res.status(400).json({ error: "Wrong password" });
+      return res.json({ error: "Wrong password" });
     }
     const userForToken = {
       email: user.email,
@@ -65,8 +70,7 @@ userRouter.post("/signin", async (req, res, next) => {
 userRouter.post("/refresh", async (req, res, next) => {
   try {
     const { refreshToken } = req.body;
-    if (!refreshToken)
-      return res.status(401).json({ error: "Refresh token is missing!!" });
+    if (!refreshToken) return res.json({ error: "Refresh token is missing!!" });
     const user = jwt.verify(refreshToken, config.REFRESH_TOKEN_SECRET);
     const userForToken = {
       email: user.email,
