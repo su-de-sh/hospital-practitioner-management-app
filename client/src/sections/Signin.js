@@ -91,7 +91,7 @@ const Signin = () => {
               }}
             >
               Don't have an account?{" "}
-              <Link to="/Signin" style={{ color: "green" }}>
+              <Link to="/signup" style={{ color: "green" }}>
                 SignUp
               </Link>
             </Typography>
