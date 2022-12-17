@@ -13,10 +13,12 @@ import {
 } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import React from "react";
+import { useNavigate } from "react-router";
 
 const PractitionerCard = ({ practitioners }) => {
-  const handleClick = () => {
-    console.log("At line no. [119] of PractitionerCard.js");
+  const navigate = useNavigate();
+  const handleClick = (id) => {
+    navigate(`/practitioner/${id}`);
   };
   const tableHeader = [
     "Avatar",
@@ -48,12 +50,12 @@ const PractitionerCard = ({ practitioners }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {practitioners.map((practitioner) => (
+          {practitioners.map((practitioner, i) => (
             <TableRow
               key={practitioner.id}
               onClick={() => handleClick(practitioner.id)}
               sx={{
-                height: "50px",
+                ":nth-of-type(even)": { backgroundColor: grey[200] },
                 backgroundColor: grey[300],
 
                 ":hover": {

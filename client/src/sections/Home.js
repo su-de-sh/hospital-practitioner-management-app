@@ -7,15 +7,7 @@ import DrawerNav from "./DrawerNav";
 import { useDispatch, useSelector } from "react-redux";
 import { initializePractitioners } from "../reducers/practitionerReducer";
 
-const Home = () => {
-  const practitionerList = useSelector((state) => state.practitioners);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(initializePractitioners());
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+const Home = ({ practitioners }) => {
   return (
     <>
       <Box
@@ -44,7 +36,7 @@ const Home = () => {
         >
           <Navbar />
 
-          <PractitionerCard practitioners={practitionerList} />
+          <PractitionerCard practitioners={practitioners} />
         </Box>
       </Box>
     </>
