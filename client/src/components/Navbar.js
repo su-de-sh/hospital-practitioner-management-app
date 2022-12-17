@@ -1,10 +1,23 @@
 import { Icon } from "@iconify/react";
-import { TextField, Typography } from "@mui/material";
-import { grey } from "@mui/material/colors";
+import { Avatar, Button, Popover, Typography } from "@mui/material";
+
 import { Box } from "@mui/system";
-import React from "react";
+import React, { useState } from "react";
 
 const Navbar = () => {
+  const user = JSON.parse(window.localStorage.getItem("user"));
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleLogout = () => {
+    window.localStorage.removeItem("user");
+    window.location.reload();
+  };
+
+  const openUserInfoPopOver = (e) => {
+    console.log(" ,Navbar.js ,[10]");
+    setAnchorEl(e.currentTarget);
+  };
+
   return (
     <Box
       sx={{
@@ -25,6 +38,7 @@ const Navbar = () => {
         }}
       >
         <Icon icon="mdi:face-man" color="black" width="32"></Icon>
+
         <Typography
           variant="h6"
           sx={{
@@ -46,10 +60,47 @@ const Navbar = () => {
           ml: "auto",
         }}
       >
-        <Icon icon="material-symbols:add-circle" color="blue" width="36">
-          click
-        </Icon>
-        <Icon icon="mdi:account-circle" color="grey" width="32"></Icon>
+        <Icon icon="material-symbols:add-circle" color="blue" width="36 " />
+
+        <Avatar
+          src="https://res.cloudinary.com/dqgzhdegr/image/upload/v1670944245/xdmkqbnprfqzi2mhsyby.jpg"
+          width="32"
+          onClick={openUserInfoPopOver}
+        />
+        <Popover
+          open={Boolean(anchorEl)}
+          anchorEl={anchorEl}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left",
+          }}
+          transformOrigin={{
+            vertical: "bottom",
+            horizontal: "right",
+          }}
+          onClose={() => setAnchorEl(null)}
+        >
+          <Box sx={{ width: "20vw" }}>
+            <Box display="flex" flexDirection="column" alignItems="center">
+              <img
+                src="https://res.cloudinary.com/dqgzhdegr/image/upload/v1670944245/xdmkqbnprfqzi2mhsyby.jpg"
+                alt="profileImage"
+                width="60px"
+              />
+
+              <Typography
+                sx={{
+                  fontFamily: "MarkOT",
+                }}
+              >
+                {user?.email}
+              </Typography>
+              <Button variant="text" onClick={handleLogout} fullWidth>
+                Logout
+              </Button>
+            </Box>
+          </Box>
+        </Popover>
       </Box>
     </Box>
   );

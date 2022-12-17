@@ -61,7 +61,7 @@ userRouter.post("/signin", async (req, res, next) => {
     const refreshToken = jwt.sign(userForToken, config.REFRESH_TOKEN_SECRET, {
       expiresIn: 24 * 60 * 60,
     });
-    res.status(200).json({ accessToken, refreshToken });
+    res.status(200).json({ accessToken, refreshToken, email });
   } catch (error) {
     next(error);
   }
