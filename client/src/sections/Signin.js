@@ -11,7 +11,7 @@ import {
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Signup = () => {
+const SignIn = () => {
   return (
     <>
       <Box
@@ -25,7 +25,8 @@ const Signup = () => {
           sx={{
             width: "30%",
             backgroundColor: "black",
-            border: "2px solid lightgreen",
+            border: "2px solid ",
+            borderColor: "primary.main",
           }}
         >
           <Container sx={{ mt: 5, display: "flex", flexDirection: "column" }}>
@@ -81,6 +82,10 @@ const Signup = () => {
                 mt: 2,
                 color: "white",
                 backgroundColor: "green",
+                ":hover": {
+                  bgcolor: "primary.main",
+                  color: "black",
+                },
               }}
             >
               SignIn
@@ -104,4 +109,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default SignIn;
