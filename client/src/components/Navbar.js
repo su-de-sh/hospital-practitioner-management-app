@@ -1,12 +1,17 @@
 import { Icon } from "@iconify/react";
 import { Avatar, Button, Popover, Typography } from "@mui/material";
-
+import { useSelector, useDispatch } from "react-redux";
 import { Box } from "@mui/system";
-import React, { useState } from "react";
-
+import React, { useEffect, useState } from "react";
+import { initializeUser } from "../reducers/userReducer";
 const Navbar = () => {
-  const user = JSON.parse(window.localStorage.getItem("user"));
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
+
+  useEffect(() => {
+    dispatch(initializeUser());
+  }, []);
 
   const handleLogout = () => {
     window.localStorage.removeItem("user");
