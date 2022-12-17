@@ -2,6 +2,7 @@ import { Icon } from "@iconify/react";
 import { Avatar, Box, Container, Typography } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
+import Logo from "../components/Logo";
 
 const DrawerNav = () => {
   const DashboardOptions = [
@@ -17,19 +18,7 @@ const DrawerNav = () => {
   ];
   return (
     <Container sx={{ mt: 5, display: "flex", flexDirection: "column" }}>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "flex-start",
-          borderBottom: "1px solid lightgreen",
-        }}
-      >
-        <Avatar src="https://res.cloudinary.com/dqgzhdegr/image/upload/v1665602024/samples/cloudinary-icon.png" />
-        <Typography variant="h4" sx={{ color: "white", fontFamily: "MarkOT" }}>
-          leaphealth
-        </Typography>
-      </Box>
+      <Logo />
 
       <Box
         sx={{

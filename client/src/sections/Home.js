@@ -1,4 +1,4 @@
-import { Box, Paper } from "@mui/material";
+import { Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import PractitionerCard from "../components/PractitionerCard";
