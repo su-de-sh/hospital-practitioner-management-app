@@ -18,14 +18,15 @@ const Signup = () => {
         sx={{
           display: "flex",
           flexDirection: "row",
-          height: "100vh",
+          height: "95vh",
         }}
       >
         <Box
           sx={{
             width: "30%",
             backgroundColor: "black",
-            border: "2px solid lightgreen",
+            border: "2px solid ",
+            borderColor: "primary.main",
           }}
         >
           <Container sx={{ mt: 5, display: "flex", flexDirection: "column" }}>
@@ -81,6 +82,10 @@ const Signup = () => {
                 mt: 2,
                 color: "white",
                 backgroundColor: "green",
+                ":hover": {
+                  bgcolor: "primary.main",
+                  color: "black",
+                },
               }}
             >
               SignUp
