@@ -19,7 +19,6 @@ const Navbar = () => {
   };
 
   const openUserInfoPopOver = (e) => {
-    console.log(" ,Navbar.js ,[10]");
     setAnchorEl(e.currentTarget);
   };
 

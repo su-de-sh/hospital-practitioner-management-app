@@ -20,10 +20,17 @@ export const logInUser = (email, password) => {
     dispatch(setUser(user));
   };
 };
+export const logOutUser = () => {
+  return async (dispatch) => {
+    window.localStorage.removeItem("user");
+
+    dispatch(setUser(null));
+  };
+};
+
 export const initializeUser = () => {
   return async (dispatch) => {
     const user = JSON.parse(window.localStorage.getItem("user"));
-    console.log("At line no. [26] of userReducer.js");
     dispatch(setUser(user));
   };
 };
