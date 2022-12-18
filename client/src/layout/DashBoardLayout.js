@@ -1,21 +1,10 @@
 import { Box } from "@mui/material";
-import React, { useEffect } from "react";
+import React from "react";
 import Navbar from "../components/Navbar";
-import PractitionerCard from "./PractitionerCard";
-import DrawerNav from "./DrawerNav";
 
-import { useDispatch, useSelector } from "react-redux";
-import { initializePractitioners } from "../reducers/practitionerReducer";
+import DrawerNav from "../sections/DrawerNav";
 
-const Home = () => {
-  const practitionerList = useSelector((state) => state.practitioners);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(initializePractitioners());
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+const DashBoardLayout = ({ children }) => {
   return (
     <>
       <Box
@@ -43,12 +32,11 @@ const Home = () => {
           }}
         >
           <Navbar />
-
-          <PractitionerCard practitioners={practitionerList} />
+          {children}
         </Box>
       </Box>
     </>
   );
 };
 
-export default Home;
+export default DashBoardLayout;

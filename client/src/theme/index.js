@@ -12,7 +12,9 @@ const MuiThemeProvider = ({ children }) => {
         main: green[500],
       },
       secondary: {
-        main: grey[500],
+        main: grey[700],
+        light: grey[400],
+        dark: grey[800],
       },
       dark: {
         main: "#000000",
@@ -30,7 +32,7 @@ const MuiThemeProvider = ({ children }) => {
         primary: green[400],
         secondary: "#121212",
       },
-      background: { paper: grey[200], default: "#121212" },
+      background: { paper: grey[200], default: "#ffffff" },
       action: {
         hover: alpha(grey[500], 0.08),
         selected: alpha(grey[500], 0.16),

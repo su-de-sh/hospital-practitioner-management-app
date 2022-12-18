@@ -7,6 +7,7 @@ import { setMessageObject } from "../reducers/messageReducer";
 import { LoadingButton } from "@mui/lab";
 import { signIn } from "../services/user";
 import { logInUser } from "../reducers/userReducer";
+import { initializePractitioners } from "../reducers/practitionerReducer";
 
 const Signin = () => {
   const dispatch = useDispatch();
@@ -19,15 +20,16 @@ const Signin = () => {
   const handleSignin = async () => {
     setLoading(true);
     const response = await signIn(email, password);
-    console.log("response ,Signin.js ,[22]", response);
+
     if (response.error) {
       setLoading(false);
       dispatch(setMessageObject(response.error));
     } else {
-      setLoading(false);
       window.localStorage.setItem("user", JSON.stringify(response));
       dispatch(logInUser(email, password));
-      navigate("/");
+      setLoading(false);
+      // dispatch(initializePractitioners());
+      // navigate("/");
     }
   };
 

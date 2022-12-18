@@ -52,7 +52,7 @@ const Navbar = () => {
             fontFamily: "MarkOT",
           }}
         >
-          Practitioner List
+          Practitioners
         </Typography>
       </Box>
 
