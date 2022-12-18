@@ -21,7 +21,18 @@ import { removePractitioner } from "../reducers/practitionerReducer";
 const PractitionerList = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const practitioners = useSelector((state) => state.practitioners);
+  const practitionerList = useSelector((state) => state.practitioners);
+  const icuSpecialistPractitionerSorted = practitionerList
+    .filter((practitioner) => practitioner.isIcuSpecialist)
+    .sort((a, b) => (a.name > b.name ? 1 : -1));
+
+  const nonIcuSpecialist = practitionerList.filter(
+    (practitioner) => !practitioner.isIcuSpecialist
+  );
+  const practitioners = [
+    ...icuSpecialistPractitionerSorted,
+    ...nonIcuSpecialist,
+  ];
   const handleClick = (id) => {
     navigate(`/practitioner/${id}`);
   };
