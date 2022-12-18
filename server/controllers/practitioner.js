@@ -20,7 +20,7 @@ practitionerRouter.get("/", async (req, res, next) => {
 practitionerRouter.post("/", async (req, res, next) => {
   try {
     if (await Practitioner.findOne({ email: req.body.email })) {
-      return res.status(400).json({ message: "Email already exists" });
+      return res.json({ message: "Email already exists" });
     }
     if (req.files) {
       const file = req.files.photo;

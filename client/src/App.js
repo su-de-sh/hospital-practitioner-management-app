@@ -7,8 +7,8 @@ import PractitionerList from "./sections/PractitionerList";
 import Signin from "./sections/Signin";
 import Signup from "./sections/Signup";
 import { initializeUser } from "./reducers/userReducer";
-import LoadingScreen from "./components/LoadingScreen";
 import GuestGuard from "./guard/GuestGuard";
+import DashBoardLayout from "./layout/DashBoardLayout";
 
 const App = () => {
   const practitionerList = useSelector((state) => state.practitioners);
@@ -35,7 +35,11 @@ const App = () => {
       <Routes>
         <Route
           path="/"
-          element={<PractitionerList practitioners={practitionerList} />}
+          element={
+            <DashBoardLayout>
+              <PractitionerList practitioners={practitionerList} />
+            </DashBoardLayout>
+          }
         />
         <Route path="/signup" element={<Signup />} />
         <Route
@@ -48,7 +52,11 @@ const App = () => {
         />
         <Route
           path="/practitioner/:id"
-          element={<PractitionerDetails practitioner={practitioner} />}
+          element={
+            <DashBoardLayout>
+              <PractitionerDetails practitioner={practitioner} />
+            </DashBoardLayout>
+          }
         />
       </Routes>
     </>

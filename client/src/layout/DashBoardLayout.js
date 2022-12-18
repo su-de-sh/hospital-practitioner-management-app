@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 
 import DrawerNav from "../sections/DrawerNav";
 
-const Home = ({ practitioners, children }) => {
+const DashBoardLayout = ({ children }) => {
   return (
     <>
       <Box
@@ -32,8 +32,6 @@ const Home = ({ practitioners, children }) => {
           }}
         >
           <Navbar />
-
-          {/* <PractitionerCard practitioners={practitioners} /> */}
           {children}
         </Box>
       </Box>
@@ -41,4 +39,4 @@ const Home = ({ practitioners, children }) => {
   );
 };
 
-export default Home;
+export default DashBoardLayout;

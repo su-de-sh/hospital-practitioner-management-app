@@ -12,9 +12,10 @@ import {
   Typography,
 } from "@mui/material";
 import { grey } from "@mui/material/colors";
+import { Container } from "@mui/system";
 import React from "react";
 import { useNavigate } from "react-router";
-import Home from "../layout/Home";
+import Home from "../layout/DashBoardLayout";
 
 const PractitionerList = ({ practitioners }) => {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ const PractitionerList = ({ practitioners }) => {
   ];
 
   return (
-    <Home>
+    <Container>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
@@ -149,7 +150,7 @@ const PractitionerList = ({ practitioners }) => {
           </TableBody>
         </Table>
       </TableContainer>
-    </Home>
+    </Container>
   );
 };
 
