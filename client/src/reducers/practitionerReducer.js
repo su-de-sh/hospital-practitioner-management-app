@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { addNewPractitioner, getPractitioners } from "../services/practitioner";
-
+import practitionerService from "../services/practitioner";
 const practitionerSlice = createSlice({
   name: "practitioner",
   initialState: [],
@@ -14,24 +14,34 @@ const practitionerSlice = createSlice({
       const practitioner = action.payload;
       state.push(practitioner);
     },
+    deletePractitioner(state, action) {
+      const id = action.payload;
+      return state.filter((x) => x.id !== id);
+    },
   },
 });
 
 export const initializePractitioners = () => {
   return async (dispatch) => {
-    const response = await getPractitioners();
+    const response = await practitionerService.getAll();
     dispatch(setPractitioner(response));
   };
 };
 
 export const addPractitioner = (practitioner) => {
   return async (dispatch) => {
-    const response = await addNewPractitioner(practitioner);
-    console.log("response ,practitionerReducer.js ,[26]", response);
+    const response = await practitionerService.create(practitioner);
+
     dispatch(addPractitionerinStore(response));
   };
 };
+export const removePractitioner = (id) => {
+  return async (dispatch) => {
+    await practitionerService.remove(id);
+    dispatch(deletePractitioner(id));
+  };
+};
 
-export const { setPractitioner, addPractitionerinStore } =
+export const { setPractitioner, addPractitionerinStore, deletePractitioner } =
   practitionerSlice.actions;
 export default practitionerSlice.reducer;

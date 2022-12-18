@@ -20,9 +20,10 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { useDispatch } from "react-redux";
 import { addPractitioner } from "../reducers/practitionerReducer";
-
+import { useNavigate } from "react-router";
 const AddPractitioner = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [practitioner, setPractitioner] = useState({
     dob: dayjs("2022-12-18"),
     isIcuSpecialist: false,
@@ -48,9 +49,10 @@ const AddPractitioner = () => {
       startTime: practitioner.startTime,
       endTime: practitioner.endTime,
       isIcuSpecialist: practitioner.isIcuSpecialist,
-      workingDays: e.target.workingDays.value.split(","),
+      workingDays: e.target.workingDays.value,
     };
     dispatch(addPractitioner(newpractitioner));
+    navigate("/");
   };
   return (
     <Container component={Paper} maxWidth="sm">

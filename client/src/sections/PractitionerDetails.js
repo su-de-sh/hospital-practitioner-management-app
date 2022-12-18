@@ -19,8 +19,6 @@ import React from "react";
 import LoadingScreen from "../components/LoadingScreen";
 
 const PractitionerDetails = ({ practitioner }) => {
-  console.log("practitioner ,PractitionerDetails.js ,[22]", practitioner);
-
   if (!practitioner) return <LoadingScreen />;
   return (
     <Container component={Paper}>
@@ -144,8 +142,8 @@ const PractitionerDetails = ({ practitioner }) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {practitioner.workingDays.map((day) => (
-                <TableRow>
+              {practitioner.workingDays.map((day, i) => (
+                <TableRow key={i}>
                   <TableCell>
                     <Typography
                       variant="h6"
