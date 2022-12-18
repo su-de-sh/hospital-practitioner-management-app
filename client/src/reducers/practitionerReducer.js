@@ -16,6 +16,7 @@ const practitionerSlice = createSlice({
     editPractitioner(state, action) {
       const id = action.payload.id;
       const filterState = state.filter((x) => x.id !== id);
+      console.log("filterState ,practitionerReducer.js ,[19]", filterState);
       const newState = [...filterState, action.payload];
       return newState;
     },
@@ -47,10 +48,11 @@ export const removePractitioner = (id) => {
   };
 };
 
-export const updatePractitioner = (practitioner) => {
+export const updatePractitioner = (id, practitioner) => {
   return async (dispatch) => {
+    console.log("practitioner ,practitionerReducer.js ,[53]", practitioner);
     const updatedPractitioner = await practitionerService.update(
-      practitioner.id,
+      id,
       practitioner
     );
     dispatch(editPractitioner(updatedPractitioner));

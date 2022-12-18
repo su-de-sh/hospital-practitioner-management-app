@@ -14,14 +14,14 @@ import {
 import { grey } from "@mui/material/colors";
 import { Container } from "@mui/system";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { removePractitioner } from "../reducers/practitionerReducer";
 
-const PractitionerList = ({ practitioners }) => {
+const PractitionerList = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const [anchorEl, setAnchorEl] = useState(null);
+  const practitioners = useSelector((state) => state.practitioners);
   const handleClick = (id) => {
     navigate(`/practitioner/${id}`);
   };

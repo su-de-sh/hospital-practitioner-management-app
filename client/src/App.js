@@ -10,6 +10,7 @@ import { initializeUser } from "./reducers/userReducer";
 import GuestGuard from "./guard/GuestGuard";
 import DashBoardLayout from "./layout/DashBoardLayout";
 import AddPractitioner from "./sections/AddPractitioner";
+import EditPractitioner from "./sections/EditPractitioner";
 
 const App = () => {
   const practitionerList = useSelector((state) => state.practitioners);
@@ -23,13 +24,19 @@ const App = () => {
   }, []);
 
   const matchPractitioner = useMatch("/practitioner/:id");
+  const matchPractitionerForEdit = useMatch("/practitioner/:id/edit");
 
   const practitioner = matchPractitioner
     ? practitionerList?.find((practitioner) => {
         return practitioner.id === matchPractitioner.params.id;
       })
     : null;
-  // console.log("practitioner ,App.js ,[27]", practitioner);
+
+  const practitionerForEdit = matchPractitionerForEdit
+    ? practitionerList?.find((practitioner) => {
+        return practitioner.id === matchPractitionerForEdit.params.id;
+      })
+    : null;
 
   return (
     <>
@@ -47,7 +54,7 @@ const App = () => {
           path="/"
           element={
             <DashBoardLayout>
-              <PractitionerList practitioners={practitionerList} />
+              <PractitionerList />
             </DashBoardLayout>
           }
         />
@@ -64,6 +71,14 @@ const App = () => {
           element={
             <DashBoardLayout>
               <AddPractitioner />
+            </DashBoardLayout>
+          }
+        />
+        <Route
+          path="/practitioner/:id/edit"
+          element={
+            <DashBoardLayout>
+              <EditPractitioner practitioner={practitionerForEdit} />
             </DashBoardLayout>
           }
         />

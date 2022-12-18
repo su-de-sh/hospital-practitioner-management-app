@@ -23,12 +23,17 @@ import { updatePractitioner } from "../reducers/practitionerReducer";
 import { useDispatch } from "react-redux";
 const PractitionerDetails = ({ practitioner }) => {
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   if (!practitioner) return <LoadingScreen />;
 
   const handleMarkIcuSpecialist = () => {
     console.log("At line no. [30] of PractitionerDetails.js");
-    dispatch(updatePractitioner({ ...practitioner, isIcuSpecialist: true }));
+    dispatch(
+      updatePractitioner(practitioner.id, {
+        ...practitioner,
+        isIcuSpecialist: true,
+      })
+    );
   };
 
   return (
@@ -88,6 +93,9 @@ const PractitionerDetails = ({ practitioner }) => {
               }}
             >
               <Button
+                onClick={() =>
+                  navigate(`/practitioner/${practitioner.id}/edit`)
+                }
                 sx={{
                   backgroundColor: "green",
                   color: "white",
