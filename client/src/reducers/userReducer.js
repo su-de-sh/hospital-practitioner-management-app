@@ -3,12 +3,12 @@ import { signIn } from "../services/user";
 
 const userSlice = createSlice({
   name: "user",
-  initialState: null,
+  initialState: { user: null, isIntialized: false },
   reducers: {
     setUser(state, action) {
       const user = action.payload;
 
-      return user;
+      return { user, isIntialized: true };
     },
   },
 });

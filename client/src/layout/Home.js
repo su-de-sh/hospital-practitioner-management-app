@@ -1,13 +1,10 @@
 import { Box } from "@mui/material";
-import React, { useEffect } from "react";
+import React from "react";
 import Navbar from "../components/Navbar";
-import PractitionerCard from "./PractitionerCard";
-import DrawerNav from "./DrawerNav";
 
-import { useDispatch, useSelector } from "react-redux";
-import { initializePractitioners } from "../reducers/practitionerReducer";
+import DrawerNav from "../sections/DrawerNav";
 
-const Home = ({ practitioners }) => {
+const Home = ({ practitioners, children }) => {
   return (
     <>
       <Box
@@ -36,7 +33,8 @@ const Home = ({ practitioners }) => {
         >
           <Navbar />
 
-          <PractitionerCard practitioners={practitioners} />
+          {/* <PractitionerCard practitioners={practitioners} /> */}
+          {children}
         </Box>
       </Box>
     </>
