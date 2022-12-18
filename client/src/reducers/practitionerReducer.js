@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addNewPractitioner, getPractitioners } from "../services/practitioner";
 import practitionerService from "../services/practitioner";
 const practitionerSlice = createSlice({
   name: "practitioner",

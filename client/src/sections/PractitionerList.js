@@ -2,11 +2,7 @@ import { Icon } from "@iconify/react";
 import {
   Avatar,
   Box,
-  Button,
-  Grid,
   Paper,
-  Popover,
-  Stack,
   Table,
   TableBody,
   TableCell,
@@ -17,7 +13,7 @@ import {
 } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import { Container } from "@mui/system";
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { removePractitioner } from "../reducers/practitionerReducer";
