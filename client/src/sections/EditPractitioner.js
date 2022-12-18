@@ -18,10 +18,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { useDispatch } from "react-redux";
-import {
-  addPractitioner,
-  updatePractitioner,
-} from "../reducers/practitionerReducer";
+import { updatePractitioner } from "../reducers/practitionerReducer";
 import { useNavigate } from "react-router";
 import LoadingScreen from "../components/LoadingScreen";
 const EditPractitioner = ({ practitioner }) => {
