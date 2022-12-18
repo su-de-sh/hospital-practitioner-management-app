@@ -14,6 +14,12 @@ const practitionerSlice = createSlice({
       const practitioner = action.payload;
       state.push(practitioner);
     },
+    editPractitioner(state, action) {
+      const id = action.payload.id;
+      const filterState = state.filter((x) => x.id !== id);
+      const newState = [...filterState, action.payload];
+      return newState;
+    },
     deletePractitioner(state, action) {
       const id = action.payload;
       return state.filter((x) => x.id !== id);
@@ -42,6 +48,20 @@ export const removePractitioner = (id) => {
   };
 };
 
-export const { setPractitioner, addPractitionerinStore, deletePractitioner } =
-  practitionerSlice.actions;
+export const updatePractitioner = (practitioner) => {
+  return async (dispatch) => {
+    const updatedPractitioner = await practitionerService.update(
+      practitioner.id,
+      practitioner
+    );
+    dispatch(editPractitioner(updatedPractitioner));
+  };
+};
+
+export const {
+  setPractitioner,
+  addPractitionerinStore,
+  deletePractitioner,
+  editPractitioner,
+} = practitionerSlice.actions;
 export default practitionerSlice.reducer;

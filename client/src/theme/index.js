@@ -34,7 +34,6 @@ const MuiThemeProvider = ({ children }) => {
       },
       background: { paper: grey[200], default: "#ffffff" },
       action: {
-        hover: alpha(grey[500], 0.08),
         selected: alpha(grey[500], 0.16),
         disabled: alpha(grey[500], 0.8),
         disabledBackground: alpha(grey[500], 0.24),
