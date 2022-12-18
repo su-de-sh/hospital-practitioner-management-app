@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { initializeUser } from "../reducers/userReducer";
+import { Link } from "react-router-dom";
 const Navbar = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -65,7 +66,9 @@ const Navbar = () => {
           ml: "auto",
         }}
       >
-        <Icon icon="material-symbols:add-circle" color="blue" width="36 " />
+        <Link to="/practitioner/add-new">
+          <Icon icon="material-symbols:add-circle" color="blue" width="36 " />
+        </Link>
 
         <Avatar
           src="https://res.cloudinary.com/dqgzhdegr/image/upload/v1670944245/xdmkqbnprfqzi2mhsyby.jpg"

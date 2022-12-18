@@ -2,6 +2,7 @@ import { Icon } from "@iconify/react";
 import {
   Avatar,
   Box,
+  Button,
   Card,
   CardContent,
   Container,
@@ -17,11 +18,19 @@ import {
 
 import React from "react";
 import LoadingScreen from "../components/LoadingScreen";
-
+import { useNavigate } from "react-router-dom";
+import { updatePractitioner } from "../reducers/practitionerReducer";
+import { useDispatch } from "react-redux";
 const PractitionerDetails = ({ practitioner }) => {
-  console.log("practitioner ,PractitionerDetails.js ,[22]", practitioner);
-
+  const dispatch = useDispatch();
+  // const navigate = useNavigate();
   if (!practitioner) return <LoadingScreen />;
+
+  const handleMarkIcuSpecialist = () => {
+    console.log("At line no. [30] of PractitionerDetails.js");
+    dispatch(updatePractitioner({ ...practitioner, isIcuSpecialist: true }));
+  };
+
   return (
     <Container component={Paper}>
       <Grid container spacing={1} direction="column">
@@ -71,6 +80,55 @@ const PractitionerDetails = ({ practitioner }) => {
                 <CardContent>DOB: {practitioner.dob}</CardContent>
               </Card>
             </Card>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "5px",
+              }}
+            >
+              <Button
+                sx={{
+                  backgroundColor: "green",
+                  color: "white",
+                  ":hover": {
+                    backgroundColor: "primary.main",
+                    color: "white",
+                  },
+                }}
+              >
+                Edit
+              </Button>
+              {practitioner.isIcuSpecialist ? (
+                <Button
+                  sx={{
+                    backgroundColor: "grey",
+                    color: "white",
+                    ":hover": {
+                      backgroundColor: "blue",
+                      color: "white",
+                    },
+                  }}
+                  disabled
+                >
+                  Mark as Icu Specialist
+                </Button>
+              ) : (
+                <Button
+                  onClick={handleMarkIcuSpecialist}
+                  sx={{
+                    backgroundColor: "blue",
+                    color: "white",
+                    ":hover": {
+                      backgroundColor: "#000055",
+                      color: "white",
+                    },
+                  }}
+                >
+                  Mark as Icu Specialist
+                </Button>
+              )}
+            </Box>
           </Card>
         </Grid>
         <Grid item xs={12} md={8}>
@@ -144,8 +202,8 @@ const PractitionerDetails = ({ practitioner }) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {practitioner.workingDays.map((day) => (
-                <TableRow>
+              {practitioner.workingDays.map((day, i) => (
+                <TableRow key={i}>
                   <TableCell>
                     <Typography
                       variant="h6"
