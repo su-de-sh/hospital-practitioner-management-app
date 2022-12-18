@@ -26,9 +26,9 @@ const PractitionerList = () => {
     .filter((practitioner) => practitioner.isIcuSpecialist)
     .sort((a, b) => (a.name > b.name ? 1 : -1));
 
-  const nonIcuSpecialist = practitionerList.filter(
-    (practitioner) => !practitioner.isIcuSpecialist
-  );
+  const nonIcuSpecialist = practitionerList
+    .filter((practitioner) => !practitioner.isIcuSpecialist)
+    .sort((a, b) => (a.name > b.name ? 1 : -1));
   const practitioners = [
     ...icuSpecialistPractitionerSorted,
     ...nonIcuSpecialist,
