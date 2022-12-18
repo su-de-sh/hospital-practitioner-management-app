@@ -7,13 +7,14 @@ import PractitionerList from "./sections/PractitionerList";
 import Signin from "./sections/Signin";
 import Signup from "./sections/Signup";
 import { initializeUser } from "./reducers/userReducer";
-import GuestGuard from "./guard/GuestGuard";
+
 import DashBoardLayout from "./layout/DashBoardLayout";
 import AddPractitioner from "./sections/AddPractitioner";
 import EditPractitioner from "./sections/EditPractitioner";
 
 const App = () => {
   const practitionerList = useSelector((state) => state.practitioners);
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -42,11 +43,15 @@ const App = () => {
     <>
       <Routes>
         <Route
-          path="/signin"
+          path="/"
           element={
-            <GuestGuard>
+            user.user ? (
+              <DashBoardLayout>
+                <PractitionerList />
+              </DashBoardLayout>
+            ) : (
               <Signin />
-            </GuestGuard>
+            )
           }
         />
         <Route path="/signup" element={<Signup />} />
