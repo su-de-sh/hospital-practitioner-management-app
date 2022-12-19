@@ -1,7 +1,11 @@
 # Hospital Practitioner Profile Management App
 Practitioner Profile Management App  is a web application that manages the profile of Hospital Practitioners. This app has login/signup feature that alllows user to authenticate and view all the list of practitioners once authenticated. The practitioner page can only be accessed by the authenticated user.This app has information of practitioner such as fullname, email, contact, dob, working days, working hours and many more. User token is expired in every one hrs and is refreshed automatically without needing to relogin. We can add, edit and delete practitioners and also we can mark practitioners as ICU specialist. ICU specialist are arranged alphabetically and shown at the top of the list while non-ICU Specialist are shown below.
-- [Postman collection](https://orange-resonance-555787.postman.co/workspace/db28db8d-d100-4381-a30f-014ae58bb0c7/collection/22334232-c0768db3-9303-49b7-a5cd-6f0da8794d85)
-- [Postman API Documentation](https://documenter.getpostman.com/view/22334232/2s8YzWS18C)
+
+## Postman Collection
+- [Here is the post man request used in testing API](https://orange-resonance-555787.postman.co/workspace/db28db8d-d100-4381-a30f-014ae58bb0c7/collection/22334232-c0768db3-9303-49b7-a5cd-6f0da8794d85)
+
+## API Documentation
+- [Here is API Documention](https://documenter.getpostman.com/view/22334232/2s8YzWS18C)
 
 # User experience walkthrough
 
