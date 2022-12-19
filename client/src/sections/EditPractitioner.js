@@ -46,19 +46,6 @@ const EditPractitioner = ({ practitioner }) => {
     e.preventDefault();
     setLoading(true);
 
-    // const newpractitioner = {
-    //   name: e.target.name.value,
-    //   email: e.target.email.value,
-    //   contact: e.target.phone.value,
-    //   address: e.target.address.value,
-    //   designation: e.target.designation.value,
-    //   photo: e.target.profilepic.value,
-    //   dob: practitioner.dob,
-    //   startTime: practitioner.startTime,
-    //   endTime: practitioner.endTime,
-    //   isIcuSpecialist: practitioner.isIcuSpecialist,
-    //   workingDays: e.target.workingDays.value,
-    // };
     dispatch(updatePractitioner(practitioner.id, newPractitioner));
     dispatch(setMessageObject("Practitioner updated successfully"));
     navigate("/");
