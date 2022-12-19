@@ -28,7 +28,7 @@ const AddPractitioner = () => {
   const [practitioner, setPractitioner] = useState({
     dob: dayjs("2022-12-18"),
     isIcuSpecialist: false,
-
+    photo: null,
     startTime: dayjs("2022-12-18T10:00:00.000Z"),
     endTime: dayjs("2022-12-18T10:00:00.000Z"),
   });
@@ -45,7 +45,7 @@ const AddPractitioner = () => {
       contact: e.target.phone.value,
       address: e.target.address.value,
       designation: e.target.designation.value,
-      photo: e.target.profilepic.value,
+      photo: practitioner.photo,
       dob: practitioner.dob,
       startTime: practitioner.startTime,
       endTime: practitioner.endTime,
@@ -195,7 +195,26 @@ const AddPractitioner = () => {
               <Grid item xs={11}>
                 <InputLabel htmlFor="upload-photo">Upload Photo</InputLabel>
 
-                <TextField type="file" name="profilepic" accept="image/*" />
+                <TextField
+                  type="file"
+                  name="profilepic"
+                  accept="image/*"
+                  onChange={(e) => {
+                    const file = e.target.files[0];
+
+                    const Reader = new FileReader();
+                    Reader.readAsDataURL(file);
+
+                    Reader.onload = () => {
+                      if (Reader.readyState === 2) {
+                        setPractitioner((prev) => ({
+                          ...prev,
+                          photo: Reader.result,
+                        }));
+                      }
+                    };
+                  }}
+                />
               </Grid>
               <Grid item xs={11}>
                 <FormControlLabel
