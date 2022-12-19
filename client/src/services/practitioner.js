@@ -3,12 +3,11 @@ import axios from "axios";
 const baseUrl = "/api/practitioner";
 
 const getAll = async () => {
-  const token = await JSON.parse(window.localStorage.getItem("user"))
-    .accessToken;
+  const token = JSON.parse(window.localStorage.getItem("user"));
 
   const config = {
     headers: {
-      Authorization: `bearer ${token}`,
+      Authorization: `bearer ${token?.accessToken}`,
     },
   };
   const response = await axios.get(`${baseUrl}`, config);
@@ -17,12 +16,11 @@ const getAll = async () => {
 };
 
 export const create = async (practitioner) => {
-  const token = await JSON.parse(window.localStorage.getItem("user"))
-    .accessToken;
+  const token = JSON.parse(window.localStorage.getItem("user"));
 
   const config = {
     headers: {
-      Authorization: `bearer ${token}`,
+      Authorization: `bearer ${token?.accessToken}`,
     },
   };
   const response = await axios.post(`${baseUrl}`, practitioner, config);
@@ -31,12 +29,11 @@ export const create = async (practitioner) => {
 };
 
 const update = async (id, newObject) => {
-  const token = await JSON.parse(window.localStorage.getItem("user"))
-    .accessToken;
+  const token = JSON.parse(window.localStorage.getItem("user"))?.accessToken;
 
   const config = {
     headers: {
-      Authorization: `bearer ${token}`,
+      Authorization: `bearer ${token?.accessToken}`,
     },
   };
   const request = axios.put(`${baseUrl}/${id}`, newObject, config);
@@ -45,12 +42,10 @@ const update = async (id, newObject) => {
 };
 
 const remove = async (id) => {
-  const token = await JSON.parse(window.localStorage.getItem("user"))
-    .accessToken;
-
+  const token = JSON.parse(window.localStorage.getItem("user"));
   const config = {
     headers: {
-      Authorization: `bearer ${token}`,
+      Authorization: `bearer ${token?.accessToken}`,
     },
   };
   const request = axios.delete(`${baseUrl}/${id}`, config);
