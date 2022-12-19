@@ -51,6 +51,7 @@ const Signup = () => {
             </Typography>
             <TextField
               label="Email"
+              id="email"
               name="email"
               type="email"
               value={email}
@@ -64,6 +65,7 @@ const Signup = () => {
             />
             <TextField
               label="Password"
+              id="password"
               name="password"
               type="password"
               value={password}
@@ -93,6 +95,7 @@ const Signup = () => {
             </Typography>
             <LoadingButton
               loading={loading}
+              id="signup-button"
               variant="outlined"
               size="large"
               onClick={handleSignup}
