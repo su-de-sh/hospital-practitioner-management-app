@@ -3,12 +3,12 @@ import { signIn } from "../services/user";
 
 const userSlice = createSlice({
   name: "user",
-  initialState: { user: null, isIntialized: false },
+  initialState: null,
   reducers: {
     setUser(state, action) {
       const user = action.payload;
 
-      return { user, isIntialized: true };
+      return user;
     },
   },
 });
@@ -31,6 +31,7 @@ export const logOutUser = () => {
 export const initializeUser = () => {
   return async (dispatch) => {
     const user = JSON.parse(window.localStorage.getItem("user"));
+    console.log("user ,userReducer.js ,[25]", user);
     dispatch(setUser(user));
   };
 };

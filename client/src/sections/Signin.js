@@ -7,7 +7,6 @@ import { setMessageObject } from "../reducers/messageReducer";
 import { LoadingButton } from "@mui/lab";
 import { signIn } from "../services/user";
 import { logInUser } from "../reducers/userReducer";
-import { initializePractitioners } from "../reducers/practitionerReducer";
 
 const Signin = () => {
   const dispatch = useDispatch();

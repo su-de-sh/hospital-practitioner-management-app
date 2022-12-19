@@ -29,10 +29,11 @@ const PractitionerList = () => {
 
   useEffect(() => {
     dispatch(initializePractitioners());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const icuSpecialistPractitionerSorted = practitionerList
-    .filter((practitioner) => practitioner.isIcuSpecialist)
+    ?.filter((practitioner) => practitioner.isIcuSpecialist)
     .sort((a, b) => (a.name > b.name ? 1 : -1));
 
   const nonIcuSpecialist = practitionerList

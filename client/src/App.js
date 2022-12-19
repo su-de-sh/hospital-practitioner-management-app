@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes, useMatch } from "react-router-dom";
-import { initializePractitioners } from "./reducers/practitionerReducer";
+
 import PractitionerDetails from "./sections/PractitionerDetails";
 import PractitionerList from "./sections/PractitionerList";
 import Signin from "./sections/Signin";
@@ -11,6 +11,7 @@ import { initializeUser } from "./reducers/userReducer";
 import DashBoardLayout from "./layout/DashBoardLayout";
 import AddPractitioner from "./sections/AddPractitioner";
 import EditPractitioner from "./sections/EditPractitioner";
+import axios from "axios";
 
 const App = () => {
   const practitionerList = useSelector((state) => state.practitioners);
@@ -19,10 +20,26 @@ const App = () => {
 
   useEffect(() => {
     dispatch(initializeUser());
-    if (user.user) {
-      dispatch(initializePractitioners());
-    }
 
+    setInterval(() => {
+      if (localStorage.user) {
+        axios
+          .post("/api/users/refresh", {
+            refreshToken: JSON.parse(localStorage.user).refreshToken,
+          })
+          .then((res) => {
+            const loggedUser = JSON.parse(localStorage.getItem("user"));
+
+            localStorage.setItem(
+              "user",
+              JSON.stringify({
+                ...loggedUser,
+                accessToken: res.data.accessToken,
+              })
+            );
+          });
+      }
+    }, 1000 * 60 * 50);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -47,7 +64,7 @@ const App = () => {
         <Route
           path="/"
           element={
-            user.user ? (
+            user ? (
               <DashBoardLayout>
                 <PractitionerList />
               </DashBoardLayout>
