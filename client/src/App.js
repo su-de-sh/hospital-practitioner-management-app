@@ -19,7 +19,9 @@ const App = () => {
 
   useEffect(() => {
     dispatch(initializeUser());
-    dispatch(initializePractitioners());
+    if (user.user) {
+      dispatch(initializePractitioners());
+    }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

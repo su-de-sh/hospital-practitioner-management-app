@@ -13,16 +13,24 @@ import {
 } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import { Container } from "@mui/system";
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { setMessageObject } from "../reducers/messageReducer";
-import { removePractitioner } from "../reducers/practitionerReducer";
+import {
+  initializePractitioners,
+  removePractitioner,
+} from "../reducers/practitionerReducer";
 
 const PractitionerList = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const practitionerList = useSelector((state) => state.practitioners);
+
+  useEffect(() => {
+    dispatch(initializePractitioners());
+  }, []);
+
   const icuSpecialistPractitionerSorted = practitionerList
     .filter((practitioner) => practitioner.isIcuSpecialist)
     .sort((a, b) => (a.name > b.name ? 1 : -1));

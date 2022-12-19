@@ -28,7 +28,7 @@ const Signin = () => {
       window.localStorage.setItem("user", JSON.stringify(response));
       dispatch(logInUser(email, password));
       setLoading(false);
-      dispatch(initializePractitioners());
+
       navigate("/");
     }
   };
