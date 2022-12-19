@@ -79,7 +79,7 @@ Follow  the installation guide below to setup and run this souce code locally on
  
  # Author
  Sudesh Mate
- <img src="https://res.cloudinary.com/dqgzhdegr/image/upload/v1671425659/IMG_7644_egkuia.jpg" width="300px" />
+ <img src="https://res.cloudinary.com/dqgzhdegr/image/upload/v1671425659/IMG_7644_egkuia.jpg" width="100px" />
 
  
  
