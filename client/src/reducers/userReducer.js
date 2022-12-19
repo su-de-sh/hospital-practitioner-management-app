@@ -31,7 +31,6 @@ export const logOutUser = () => {
 export const initializeUser = () => {
   return async (dispatch) => {
     const user = JSON.parse(window.localStorage.getItem("user"));
-    console.log("user ,userReducer.js ,[25]", user);
     dispatch(setUser(user));
   };
 };
