@@ -21,6 +21,7 @@ import { useDispatch } from "react-redux";
 import { updatePractitioner } from "../reducers/practitionerReducer";
 import { useNavigate } from "react-router";
 import LoadingScreen from "../components/LoadingScreen";
+import { setMessageObject } from "../reducers/messageReducer";
 const EditPractitioner = ({ practitioner }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -59,6 +60,7 @@ const EditPractitioner = ({ practitioner }) => {
     //   workingDays: e.target.workingDays.value,
     // };
     dispatch(updatePractitioner(practitioner.id, newPractitioner));
+    dispatch(setMessageObject("Practitioner updated successfully"));
     navigate("/");
   };
   return (
@@ -167,6 +169,7 @@ const EditPractitioner = ({ practitioner }) => {
               <Grid item xs={11}>
                 <TextField
                   label="Working Days"
+                  id="working-days"
                   value={newPractitioner.workingDays}
                   onChange={(e) => {
                     setNewPractitioner((prev) => ({
@@ -256,6 +259,7 @@ const EditPractitioner = ({ practitioner }) => {
               </Grid>
               <Grid item xs={11}>
                 <LoadingButton
+                  id="submit"
                   loading={loading}
                   type="submit"
                   sx={{ mt: 4 }}

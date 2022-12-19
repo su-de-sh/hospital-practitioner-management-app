@@ -57,6 +57,7 @@ const Signin = () => {
             </Typography>
             <TextField
               label="Email"
+              id="email"
               name="email"
               type="email"
               value={email}
@@ -70,6 +71,7 @@ const Signin = () => {
             />
             <TextField
               label="Password"
+              id="password"
               name="password"
               type="password"
               value={password}
@@ -99,6 +101,7 @@ const Signin = () => {
             </Typography>
             <LoadingButton
               loading={loading}
+              id="signin-button"
               variant="outlined"
               size="large"
               onClick={handleSignin}

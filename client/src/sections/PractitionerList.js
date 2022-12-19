@@ -16,6 +16,7 @@ import { Container } from "@mui/system";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { setMessageObject } from "../reducers/messageReducer";
 import { removePractitioner } from "../reducers/practitionerReducer";
 
 const PractitionerList = () => {
@@ -37,8 +38,7 @@ const PractitionerList = () => {
     navigate(`/practitioner/${id}`);
   };
   const handleDelete = (id) => {
-    console.log("id ,PractitionerList.js ,[33]", id);
-
+    dispatch(setMessageObject("Practitioner deleted successfully"));
     dispatch(removePractitioner(id));
   };
   const tableHeader = [
@@ -75,6 +75,7 @@ const PractitionerList = () => {
             {practitioners.map((practitioner) => (
               <TableRow
                 key={practitioner.id}
+                id="practitioner-row"
                 onClick={() => handleClick(practitioner.id)}
                 sx={{
                   ":nth-of-type(even)": { backgroundColor: grey[200] },
@@ -170,6 +171,7 @@ const PractitionerList = () => {
                   >
                     <Icon
                       icon="mdi:delete"
+                      id="delete-button"
                       width="20"
                       onClick={(e) => {
                         e.stopPropagation();

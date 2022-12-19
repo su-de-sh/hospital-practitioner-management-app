@@ -20,6 +20,8 @@ import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { useDispatch } from "react-redux";
 import { addPractitioner } from "../reducers/practitionerReducer";
 import { useNavigate } from "react-router";
+import { setMessageObject } from "../reducers/messageReducer";
+
 const AddPractitioner = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -51,6 +53,7 @@ const AddPractitioner = () => {
       workingDays: e.target.workingDays.value,
     };
     dispatch(addPractitioner(newpractitioner));
+    dispatch(setMessageObject("New practitioner added successfully"));
     navigate("/");
   };
   return (
@@ -74,6 +77,7 @@ const AddPractitioner = () => {
             <Grid container item xs={12} gap={0.5}>
               <Grid item xs={11}>
                 <TextField
+                  id="name"
                   label="Name"
                   name="name"
                   size="small"
@@ -84,6 +88,7 @@ const AddPractitioner = () => {
 
               <Grid item xs={11}>
                 <TextField
+                  id="email"
                   label="Email"
                   name="email"
                   size="small"
@@ -94,6 +99,7 @@ const AddPractitioner = () => {
 
               <Grid item xs={11}>
                 <TextField
+                  id="phone"
                   label="Phone"
                   name="phone"
                   size="small"
@@ -105,6 +111,7 @@ const AddPractitioner = () => {
 
               <Grid item xs={11}>
                 <TextField
+                  id="address"
                   label="Address"
                   name="address"
                   size="small"
@@ -114,6 +121,7 @@ const AddPractitioner = () => {
               </Grid>
               <Grid item xs={11}>
                 <TextField
+                  id="designation"
                   label="Designation"
                   name="designation"
                   size="small"
@@ -123,6 +131,7 @@ const AddPractitioner = () => {
               </Grid>
               <Grid item xs={11}>
                 <TextField
+                  id="workingDays"
                   label="Working Days"
                   name="workingDays"
                   size="small"
@@ -164,7 +173,7 @@ const AddPractitioner = () => {
                         }));
                       }}
                       renderInput={(params) => (
-                        <TextField {...params} size="small" />
+                        <TextField id="start-time" {...params} size="small" />
                       )}
                     />
                     <TimePicker
@@ -177,7 +186,7 @@ const AddPractitioner = () => {
                         }));
                       }}
                       renderInput={(params) => (
-                        <TextField {...params} size="small" />
+                        <TextField id="end-time" {...params} size="small" />
                       )}
                     />
                   </Stack>
@@ -207,6 +216,7 @@ const AddPractitioner = () => {
               </Grid>
               <Grid item xs={11}>
                 <LoadingButton
+                  id="submit"
                   loading={loading}
                   type="submit"
                   sx={{ mt: 4 }}

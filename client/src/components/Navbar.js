@@ -7,6 +7,8 @@ import { initializeUser } from "../reducers/userReducer";
 import { Link } from "react-router-dom";
 const Navbar = () => {
   const user = useSelector((state) => state.user);
+  const message = useSelector((state) => state.messages);
+  console.log("message ,Navbar.js ,[11]", message);
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -39,6 +41,7 @@ const Navbar = () => {
           display: "flex",
           flexDirection: "row",
           alignItems: "center",
+          justifyContent: "space-between",
           gap: "8px",
           ml: 2,
         }}
@@ -53,10 +56,23 @@ const Navbar = () => {
             fontFamily: "MarkOT",
           }}
         >
-          Practitioners
+          Practitioner Management
         </Typography>
       </Box>
-
+      <Box>
+        {message ? (
+          <Typography
+            variant="h6"
+            sx={{
+              ml: "4px",
+              color: "blue",
+              fontWeight: "bold",
+            }}
+          >
+            {message}
+          </Typography>
+        ) : null}
+      </Box>
       <Box
         sx={{
           display: "flex",
@@ -67,7 +83,12 @@ const Navbar = () => {
         }}
       >
         <Link to="/practitioner/add-new">
-          <Icon icon="material-symbols:add-circle" color="blue" width="36 " />
+          <Icon
+            id="add-new-button"
+            icon="material-symbols:add-circle"
+            color="blue"
+            width="36 "
+          />
         </Link>
 
         <Avatar

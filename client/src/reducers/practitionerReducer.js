@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import practitionerService from "../services/practitioner";
+
 const practitionerSlice = createSlice({
   name: "practitioner",
   initialState: [],
@@ -37,7 +38,6 @@ export const initializePractitioners = () => {
 export const addPractitioner = (practitioner) => {
   return async (dispatch) => {
     const response = await practitionerService.create(practitioner);
-
     dispatch(addPractitionerinStore(response));
   };
 };
