@@ -22,16 +22,14 @@ practitionerRouter.post("/", async (req, res, next) => {
     if (await Practitioner.findOne({ email: req.body.email })) {
       return res.json({ message: "Email already exists" });
     }
-    if (req.files) {
-      const file = req.files.photo;
-      const uploadedResponse = await cloudinary.uploader.upload(
-        file.tempFilePath,
-        {
-          width: 200,
-          height: 200,
-          crop: "fill",
-        }
-      );
+
+    if (req.body.photo) {
+      const file = req.body.photo;
+      const uploadedResponse = await cloudinary.uploader.upload(file, {
+        width: 200,
+        height: 200,
+        crop: "fill",
+      });
       req.body.profilePic = uploadedResponse.url;
     }
 
