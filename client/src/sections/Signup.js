@@ -23,7 +23,7 @@ const Signup = () => {
       dispatch(setMessageObject(response.error));
     } else {
       setLoading(false);
-      navigate("/signin");
+      navigate("/");
     }
   };
 

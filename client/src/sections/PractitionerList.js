@@ -32,6 +32,9 @@ const PractitionerList = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  if (practitionerList.error)
+    return <div>{practitionerList.error}. Logout and login again!!</div>;
+
   const icuSpecialistPractitionerSorted = practitionerList
     ?.filter((practitioner) => practitioner.isIcuSpecialist)
     .sort((a, b) => (a.name > b.name ? 1 : -1));
